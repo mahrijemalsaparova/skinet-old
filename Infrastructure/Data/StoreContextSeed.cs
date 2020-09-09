@@ -12,13 +12,13 @@ namespace Infrastructure.Data
     public class StoreContextSeed
     {
         public static async Task SeedAsync(StoreContext context, ILoggerFactory loggerFactory)
-        {
+        { 
             try
-            {
+            { // eğer database'de hiç ProductBrand yoksa
                 if(!context.ProductBrands.Any())
-                {
+                {  // dosyadan ilgili dosyanın çekilmesi
                     var brandsData = File.ReadAllText("../Infrastructure/Data/SeedData/brands.json");
-
+                    // serialize brands.json data into ProductBrand object
                     var brands = JsonSerializer.Deserialize<List<ProductBrand>>(brandsData);
 
                     foreach (var item in brands)
@@ -62,7 +62,7 @@ namespace Infrastructure.Data
                 var logger = loggerFactory.CreateLogger<StoreContextSeed>();
                 logger.LogError(ex.Message);
             }
-
+// bu işlemleri daha sonra gidip program.cs class'a bildirmemiz gerekiyor ki çalışmaya başladığında verileri gelip burdan çeksin
         }
     }
 }

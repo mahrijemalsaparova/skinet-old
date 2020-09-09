@@ -9,9 +9,10 @@ namespace API.Extensions
 {
     public static class ApplicationServicesExtensions
     {
-        public static IServiceCollection AddApplicationServices(this IServiceCollection services)
+        public static IServiceCollection AddApplicationServices(this IServiceCollection services) //extent edeceğimiz sınıfı this diye gösteriyoruz.
         {
             services.AddScoped<IProductRepository, ProductRepository>();
+            // Generic oldukları için typeof kullanıyoruz
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
 
              // configuration of our apicontroller (davranışı yapılandırmak için)

@@ -21,8 +21,10 @@ namespace API.Extensions
              // Endpointlerimizi Swagger'da göstermek için uygulanan middleware
             
             app.UseSwagger();
+            //we're using swagger UI as well which will allow us to browse to a web page
+            // which is going to show all of our API endpoints.
             app.UseSwaggerUI(c =>{c
-            .SwaggerEndpoint("/swagger/v1/swagger.json", "SkiNet API v1");});
+            .SwaggerEndpoint("/swagger/v1/swagger.json", "SkiNet API v1");});  //localhost:5001/swagger/v1/swagger.json
 
             return app;
         }

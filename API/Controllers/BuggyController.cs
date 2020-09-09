@@ -16,9 +16,10 @@ namespace API.Controllers
         public ActionResult GetNotFoundRequest()
         {
             var thing = _context.Products.Find(42);
-
+            // 42 numaralı product olmsdığı için NotFound hatası fırlatacak
             if(thing == null)
             {
+                // tek parametre o yüzden message=null yaptık ApiResponse'de
                 return NotFound(new ApiResponse(404));
             }
             return Ok();
@@ -28,7 +29,7 @@ namespace API.Controllers
         public ActionResult GetServerError()
         {
             var thing = _context.Products.Find(42);
-
+            // thing null olacak ve null tostring convert olamaz o yüzden server error fırlatacak 
             var thingToReturn = thing.ToString();
 
             return Ok();

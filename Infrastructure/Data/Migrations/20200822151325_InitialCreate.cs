@@ -53,6 +53,7 @@ namespace Infrastructure.Data.Migrations
                         column: x => x.ProductBrandId,
                         principalTable: "ProductBrands",
                         principalColumn: "Id",
+                        // CASCADE : Eğer bir ProductBrand silersek Product tablosundaki ProductBrandId silinir 
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Products_ProductTypes_ProductTypeId",

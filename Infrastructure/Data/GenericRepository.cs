@@ -8,7 +8,8 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Data
 {
-    public class GenericRepository<T> : IGenericRepository<T> where T : BaseEntity
+    // daha sonra bu ikisi (GenericRepository,IGenericRepository) startupdaki(yeni ApplicationServicesExtensions) service eklenmelidir.
+    public class GenericRepository<T> : IGenericRepository<T> where T : BaseEntity  // constraint de aynı olmalı
     {
         private readonly StoreContext _context;
         public GenericRepository(StoreContext context)
@@ -18,6 +19,7 @@ namespace Infrastructure.Data
 
         public async Task<T> GetByIdAsync(int id)
         {
+            // Set<T> parametre olarak gelen T değeri neyse ona göre database tablo set eder
             return await _context.Set<T>().FindAsync(id);
         }
 
@@ -26,6 +28,8 @@ namespace Infrastructure.Data
         public async Task<IReadOnlyList<T>> ListAllAsync()
         {
             return await _context.Set<T>().ToListAsync();
+
+            // daha sonra bu iki metodu gidip ProductControllerda çagırcaz
         }
 
          public async Task<T> GetEntityWithSpec(ISpecification<T> spec)
@@ -36,6 +40,12 @@ namespace Infrastructure.Data
         public async Task<IReadOnlyList<T>> ListAsync(ISpecification<T> spec)
         {
             return await ApplySpecification(spec).ToListAsync(); 
+            // daha sonra bu iki metodu contollerda kullanmak için işlemler yapıyoruz.
+        }
+
+        public async Task<int> CountAsync(ISpecification<T> spec)
+        {
+            return await ApplySpecification(spec).CountAsync(); // so we can get of number result
         }
 
         private IQueryable<T> ApplySpecification(ISpecification<T> spec)
@@ -43,6 +53,6 @@ namespace Infrastructure.Data
             return SpecificationEvaluator<T>.GetQuery(_context.Set<T>().AsQueryable(), spec);
         }
 
-
+        
     }
 }

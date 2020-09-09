@@ -22,7 +22,7 @@ namespace API
 
         public void ConfigureServices(IServiceCollection services)
         {
-           
+           // AutoMapper için gereken işlemleri içeren class MappingProfiles olduğu için typeof() ile belirttik
             services.AddAutoMapper(typeof(MappingProfiles));
             services.AddControllers();
 
@@ -32,25 +32,36 @@ namespace API
             services.AddApplicationServices();
 
             services.AddSwaggerDocumentation();
+            //angular tarafında header görebilmemiz için 
+            services.AddCors(opt => 
+            {
+                opt.AddPolicy("CorsPolicy", policy =>
+                {
+                    policy.AllowAnyHeader().AllowAnyMethod().WithOrigins("https://localhost:4200");
+                });
+            });
 
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             // using our own created middleware
-
+            // ExceptionMiddleware sınıfını kullanıyoruz
            app.UseMiddleware<ExceptionMiddleware>();
 
             // in the event that request comes into our API server but we don't have an end point that
             // matches that particular request then we're going to hit this bit of middleware
+            // olmayan endpoint hatası için
 
             app.UseStatusCodePagesWithReExecute("/errors/{0}"); // {0} placeholder of the status code.
 
             app.UseHttpsRedirection();
 
             app.UseRouting();
-
-            app.UseStaticFiles(); // for pictures
+                // wwwroot'taki fotografların url'si ile postmanda çagırdığımızda gelmesi için önemli metod.
+            app.UseStaticFiles();
+            //yukarıdaki AddCors için
+            app.UseCors("CorsPolicy");
 
             app.UseAuthorization();
 

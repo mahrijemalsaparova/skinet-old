@@ -8,6 +8,7 @@ namespace API.Controllers
 {
     [ApiController]
     [Route("[controller]")]
+    //swaggerda göstermemesi için
     [ApiExplorerSettings(IgnoreApi = true)]  // swaggerdaki hatayı kaldırmak için
     public class WeatherForecastController : ControllerBase
     {

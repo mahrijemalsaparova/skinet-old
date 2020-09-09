@@ -1,5 +1,3 @@
-using System;
-
 namespace API.Errors
 {
     public class ApiResponse
@@ -7,6 +5,7 @@ namespace API.Errors
         public ApiResponse(int statusCode, string message = null)
         {
             StatusCode = statusCode;
+            // message null ise GetDefaultMessageForStatusCode metodunu çalıştır.
             Message = message ?? GetDefaultMessageForStatusCode(statusCode);
         }
 
@@ -22,6 +21,7 @@ namespace API.Errors
                 404 => "Resource found, it was not",
                 500 => "Errors are the path to the dark side. Errors lead to anger. Anger leads to hate. Hate leads to career change",
                 _ => null
+                //daha sonra bu class BuggyControllerda çagırıldı, response'ları refaktör etmek için
             };
         }
     }

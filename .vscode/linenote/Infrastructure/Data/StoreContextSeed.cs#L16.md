@@ -1,0 +1,1 @@
+buradan ulaşılacak global olarak exception handler olmadığı için try/catch kullanıyoruz.

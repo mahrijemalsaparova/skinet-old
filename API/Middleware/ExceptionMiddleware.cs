@@ -11,6 +11,7 @@ namespace API.Middleware
 {
     public class ExceptionMiddleware
     {
+        //ApiException için. Exception hatası için.
         private readonly RequestDelegate _next;
         private readonly ILogger<ExceptionMiddleware> _logger;
         private readonly IHostEnvironment _env;
@@ -20,7 +21,7 @@ namespace API.Middleware
             _logger = logger;
             _next = next;
         }
-
+        //middleware method
         public async Task InvokeAsync(HttpContext context)
         {
             try
@@ -30,7 +31,7 @@ namespace API.Middleware
             catch (Exception ex) // if there is exception we want to catch it here.
             {
                 _logger.LogError(ex, ex.Message);
-                context.Response.ContentType = "application/json";
+                context.Response.ContentType = "application/json"; //responsun tipi 
                 context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
 
                 var response = _env.IsDevelopment()
@@ -42,9 +43,10 @@ namespace API.Middleware
                 // returns our response in camelcase
                 var options = new JsonSerializerOptions{PropertyNamingPolicy = JsonNamingPolicy.CamelCase};
 
-                var json = JsonSerializer.Serialize(response, options);
+                var json = JsonSerializer.Serialize(response, options); // object => string
 
                 await context.Response.WriteAsync(json);
+                //daha sonra bu middlewarı startup'ta kullanıyoruz
             }
         }
     }

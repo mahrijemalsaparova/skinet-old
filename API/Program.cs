@@ -15,7 +15,7 @@ namespace API
         {   
             // Migrate database when app start
            var host = CreateHostBuilder(args).Build();
-
+            // DbContext'e ulaşmak için servis sağlayıcıları.
            using(var scope = host.Services.CreateScope())
            {
                var services = scope.ServiceProvider;
@@ -23,9 +23,12 @@ namespace API
 
                try 
                {
+                    // İlgili servisle StoreContex'miz çagırıldı.
                    var context = services.GetRequiredService<StoreContext>();
+                   // Bağlam için bekleyen geçişleri zaman uyumsuz olarak veritabanına uygular.
+                   //  Zaten mevcut değilse veritabanını oluşturacaktır.
                    await context.Database.MigrateAsync();
-                    // seed the data when app start
+                    // seed the data from StoreContextSeed  when app start
                     await StoreContextSeed.SeedAsync(context, loggerFactory);
                }
                catch(Exception ex)

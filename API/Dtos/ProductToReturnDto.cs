@@ -2,6 +2,7 @@ namespace API.Dtos
 {
     public class ProductToReturnDto
     {
+        // geri dönen verimiz bu şekli alacak
         public int Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
