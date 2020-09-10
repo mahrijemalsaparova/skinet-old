@@ -1,0 +1,1 @@
+ngx-bootstrap indirdikten sonra otomatik configure eder bu şekilde.

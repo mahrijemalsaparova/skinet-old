@@ -1,0 +1,1 @@
+sertifika için. angular'ı https de run olması için.
