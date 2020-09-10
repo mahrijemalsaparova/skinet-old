@@ -1,1 +1,0 @@
-ngx-bootstrap indikten sonra otomatik import edilir.
