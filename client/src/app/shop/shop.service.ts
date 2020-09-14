@@ -5,6 +5,7 @@ import { IPagination } from '../shared/models/pagination';
 import { IType } from '../shared/models/productType';
 import {map} from 'rxjs/operators';
 import { ShopParams } from '../shared/models/shopParams';
+import { IProduct } from '../shared/models/product';
 // uygulama çalıştığı sürece servicler çalışır singletondur. yani illa çagırmamıza gerek yok arka planda hep çalışır.
 // bu özelliği ise verileri çekmekte bolca işimize yarar. yani biz verileri istediğimiz zaman kullanmak için bekletebiliriz
 // burada hazır vaziyette.
@@ -48,6 +49,10 @@ export class ShopService {
           return response.body; // response.body is IPagination property.
         })
       );
+  }
+  // product-details.component.ts için, yani tek bir product için
+  getProduct(id: number) {
+    return this.http.get<IProduct>(this.baseUrl + 'products/' + id);
   }
 
   getBrands() {

@@ -5,7 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CoreModule } from './core/core.module';
-import { ShopModule } from './shop/shop.module';
+import { HomeModule } from './home/home.module';
 
 
 @NgModule({
@@ -21,7 +21,8 @@ import { ShopModule } from './shop/shop.module';
     HttpClientModule,
     // içindeki NavBarComponente bütün moduller ulaşabilir.
     CoreModule,
-    ShopModule
+   // ShopModule, gerek kalmadı çünkü kendi içinde routing yani lazyloading edilecek
+    HomeModule
   ],
   providers: [],
   bootstrap: [AppComponent]
