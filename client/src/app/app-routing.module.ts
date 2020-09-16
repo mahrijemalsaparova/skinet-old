@@ -8,16 +8,17 @@ import { ProductDetailsComponent } from './shop/product-details/product-details.
 
 const routes: Routes = [
   // adresin sonunda boşluk olursa HomeComponent sayfasına gidilir.
-  {path: '', component: HomeComponent},
-  {path: 'test-error', component: TestErrorComponent},
-  {path: 'server-error', component: ServerErrorComponent},
-  {path: 'not-found', component: NotFoundComponent},
+  {path: '', component: HomeComponent, data: {breadcrumb: 'Home'}},
+  {path: 'test-error', component: TestErrorComponent, data: {breadcrumb: 'Test Errors'}},
+  {path: 'server-error', component: ServerErrorComponent, data: {breadcrumb: 'Server Errors'}},
+  {path: 'not-found', component: NotFoundComponent, data: {breadcrumb: 'Not Found'}},
   // burada lazyloading yaptığımız için {path: 'shop', component: ShopComponent} yerine bu şekilde yazıyoruz.
   // çünkü shop route işlemimiz shop.module.ts'in kendi içinde gerçekleşecek app.module.ts'de değil.
-  {path: 'shop', loadChildren: () => import('./shop/shop.module').then(mod => mod.ShopModule)},
+  {path: 'shop', loadChildren: () => import('./shop/shop.module').then(mod => mod.ShopModule),
+  data: {breadcrumb: 'Shop'}},
   {path: 'shop/:id', component: ProductDetailsComponent},
   // yalnış veya hatalı addres için home kısmına redirect eder
-  {path: '**', redirectTo: '', pathMatch: 'full'},
+  {path: '**', redirectTo: 'not-found', pathMatch: 'full'},
 ];
 
 @NgModule({

@@ -1,10 +1,11 @@
-<div class="container">
+<div class="container mt-3">
 <div class="row">
 
     <section class="col-3">
       <!--Fiters--> 
-      <h5 class="text-warning ml-3">Sort</h5>
-      <select class="custom-select mb-3" (change)="onSortSelected($event.target.value)">
+      <ng-container *ngIf="types && brands">  <!--loading yaparken arka planda birşey gözükmemesi ve aynı anda sayfanın gelmesi için-->
+      <h5 class="text-warning ml-3  mt-3 mb-3">Sort</h5>
+      <select class="custom-select mb-4" (change)="onSortSelected($event.target.value)">
           <option *ngFor="let sort of sortOptions" 
                 [value]="sort.value"
           >
@@ -34,8 +35,8 @@
         >
             {{type.name}}
         </li>
-        
       </ul>
+    </ng-container>
     </section>
 
     <section class="col-9">
@@ -48,7 +49,7 @@
             [pageNumber]="this.shopParams.pageNumber"
          ></app-paging-header>
 
-            <div class="form-inline mt-2">
+            <div class="form-inline " *ngIf="products" > <!--loading yaparken arkada gözükmemesi için ng-if koyduk-->
                 <input (keyup.enter)="onSearch()" class="form-control mr-3" #search style="width: 300px;" placeholder="Search" type="text">
                 <button (click)="onSearch()" class="btn btn-outline-primary my-2">Search</button>
                 <button (click)="onReset()" class="btn btn-outline-success ml-2 my-2">Reset</button>

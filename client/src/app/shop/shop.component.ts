@@ -12,7 +12,8 @@ import { ShopService } from './shop.service';
 })
 export class ShopComponent implements OnInit {
   // @ViewChild shop.component.html deki #search inputuna ulaşmak için
-  @ViewChild('search', {static: true}) searchTerm: ElementRef;
+  @ViewChild('search', {static: false}) searchTerm: ElementRef; // static: false anlamı eğer product varsa getir
+                                                                   // statik değer değil yani hep sayfada olmasın istenildiğinde gelsin
   products: IProduct[];
   brands: IBrand[];
   types: IType[];

@@ -7,6 +7,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CoreModule } from './core/core.module';
 import { HomeModule } from './home/home.module';
 import { ErrorInterceptor } from './core/interceptors/error.interceptor';
+import { NgxSpinnerModule } from 'ngx-spinner';
+import { LoadingInterceptor } from './core/interceptors/loading.interceptors';
 
 
 @NgModule({
@@ -23,12 +25,15 @@ import { ErrorInterceptor } from './core/interceptors/error.interceptor';
     // içindeki NavBarComponente bütün moduller ulaşabilir.
     CoreModule,
    // ShopModule, gerek kalmadı çünkü kendi içinde routing yani lazyloading edilecek
-    HomeModule
+    HomeModule,
+    // sayfada load yaptıgınmızda cıkan anımasyon için
+    NgxSpinnerModule
   ],
   providers: [
     // error.interceptor.ts kullanabilmek için
     // muiti true olması demek bizim kendi interceptorumuz çalışmasın, app.modulun kendi interceptorları ile beraber çalışsın demek.
-    {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
+    {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+    {provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true }
   ],
   bootstrap: [AppComponent]
 })
