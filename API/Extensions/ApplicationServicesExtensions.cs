@@ -12,9 +12,12 @@ namespace API.Extensions
         public static IServiceCollection AddApplicationServices(this IServiceCollection services) //extent edeceğimiz sınıfı this diye gösteriyoruz.
         {
             services.AddScoped<IProductRepository, ProductRepository>();
+            services.AddScoped<IBasketRepository, BasketRepository>();
+
             // Generic oldukları için typeof kullanıyoruz
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
 
+           
              // configuration of our apicontroller (davranışı yapılandırmak için)
             // validasyon error'ı daha okunur hale getirmek için
             
