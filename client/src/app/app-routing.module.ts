@@ -16,6 +16,10 @@ const routes: Routes = [
   // çünkü shop route işlemimiz shop.module.ts'in kendi içinde gerçekleşecek app.module.ts'de değil.
   {path: 'shop', loadChildren: () => import('./shop/shop.module').then(mod => mod.ShopModule),
   data: {breadcrumb: 'Shop'}},
+  {path: 'basket', loadChildren: () => import('./basket/basket.module').then(mod => mod.BasketModule),
+  data: {breadcrumb: 'Basket'}},
+  {path: 'checkout', loadChildren: () => import('./checkout/checkout.module').then(mod => mod.CheckoutModule),
+  data: {breadcrumb: 'Checkout'}},
   {path: 'shop/:id', component: ProductDetailsComponent},
   // yalnış veya hatalı addres için home kısmına redirect eder
   {path: '**', redirectTo: 'not-found', pathMatch: 'full'},
