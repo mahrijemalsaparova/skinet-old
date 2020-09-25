@@ -3,6 +3,7 @@ using API.Helpers;
 using API.Middleware;
 using AutoMapper;
 using Infrastructure.Data;
+using Infrastructure.Identity;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -29,6 +30,8 @@ namespace API
 
             services.AddDbContext<StoreContext>(x => x.UseSqlite(_config.GetConnectionString("DefaultConnection")));
 
+            services.AddDbContext<AppIdentityDbContext>(x => x.UseSqlite(_config.GetConnectionString("IdentityConnection")));
+
             // Redis için
             services.AddSingleton<IConnectionMultiplexer>(c => {
                 var configuration = ConfigurationOptions.Parse(_config.GetConnectionString("Redis"),
@@ -38,6 +41,9 @@ namespace API
 
             // Startup'taki kod kalabalığını azaltmak için genişlettiğimiz IServiceCollection'ı çağırma.
             services.AddApplicationServices();
+
+            //IdentityService için 
+            services.AddIdentityServices(_config);
 
             services.AddSwaggerDocumentation();
             //angular tarafında header görebilmemiz için 
@@ -71,6 +77,7 @@ namespace API
             //yukarıdaki AddCors için
             app.UseCors("CorsPolicy");
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseSwaggerDocumentation();
