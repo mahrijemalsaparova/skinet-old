@@ -18,6 +18,9 @@ namespace API.Helpers
                 // for full path of picture
                 .ForMember(d => d.PictureUrl, o => o.MapFrom<ProductUrlResolver>());
             CreateMap<Address, AddressDto>().ReverseMap(); // reverseMap her iki taraf birbirine map olabilir demek
+            CreateMap<CustomerBasketDto, CustomerBasket>();
+            CreateMap<BasketItemDto, BasketItem>();
+           
         }
     }
 }
