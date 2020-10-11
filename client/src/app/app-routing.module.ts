@@ -20,6 +20,8 @@ const routes: Routes = [
   data: {breadcrumb: 'Basket'}},
   {path: 'checkout', loadChildren: () => import('./checkout/checkout.module').then(mod => mod.CheckoutModule),
   data: {breadcrumb: 'Checkout'}},
+  {path: 'account', loadChildren: () => import('./account/account.module').then(mod => mod.AccountModule),
+  data: {breadcrumb: {skip: true}}},
   {path: 'shop/:id', component: ProductDetailsComponent},
   // yalnış veya hatalı addres için home kısmına redirect eder
   {path: '**', redirectTo: 'not-found', pathMatch: 'full'},
