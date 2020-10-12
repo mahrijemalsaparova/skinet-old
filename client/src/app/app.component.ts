@@ -21,13 +21,11 @@ export class AppComponent implements OnInit{
   loadCurrentUser() {
     // sayfa refresh olduğunda login olan user aynen kalacak yok olmayacak
     const token = localStorage.getItem('token');
-    if (token) {
-      this.accountService.loadCurrentUser(token).subscribe(() => {
+    this.accountService.loadCurrentUser(token).subscribe(() => {
         console.log('loaded user');
       }, error => {
         console.log(error);
       });
-    }
   }
 
   loadBasket() {
