@@ -20,6 +20,7 @@ namespace API.Helpers
             CreateMap<Address, AddressDto>().ReverseMap(); // reverseMap her iki taraf birbirine map olabilir demek
             CreateMap<CustomerBasketDto, CustomerBasket>();
             CreateMap<BasketItemDto, BasketItem>();
+            CreateMap<AddressDto, Core.Entities.OrderAggregate.Address>();
            
         }
     }
