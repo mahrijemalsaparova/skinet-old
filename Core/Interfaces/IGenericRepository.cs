@@ -18,5 +18,10 @@ namespace Core.Interfaces
         //kaç tane item olduğunu count eden metod
         Task<int> CountAsync(ISpecification<T> spec);
         
+        // direkt olarak database'e kayıt edilmediği için async yapmaya gerek yok
+        void Add(T entity);
+        void Update(T entity);
+        void Delete(T entity);
+        
     }
 }
